@@ -35,7 +35,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASWWORD }}
+          password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
             docker stop react_app
