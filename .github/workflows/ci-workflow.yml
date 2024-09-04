@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@1.0.3
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
@@ -40,4 +40,5 @@ jobs:
           script: |
             docker stop react_app
             docker rm react_app
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
             docker run --name=react_app -d -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
