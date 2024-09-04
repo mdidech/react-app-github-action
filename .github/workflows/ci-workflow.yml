@@ -40,5 +40,4 @@ jobs:
           script: |
             docker stop react_app
             docker rm react_app
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
             docker run --name=react_app -d -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
