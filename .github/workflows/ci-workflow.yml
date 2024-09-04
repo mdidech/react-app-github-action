@@ -30,5 +30,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: deployment
-        run: echo "deployment...."
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASWWORD }}
+          port: 22
+          script: |
+            docker stop react_app
+            docker rm react_app
+            docker run --name=react_app -d -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
