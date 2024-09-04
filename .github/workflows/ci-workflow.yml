@@ -38,4 +38,10 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: 22
           script: |
+            if [ "$(docker ps -aq -f name=react_app)" ]; then
+             docker stop react_app
+             docker rm react_app
+             docker rmi ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
+            fi
+            docker pull ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
             docker run --name=react_app -d -p 8000:80 ${{ secrets.DOCKER_USERNAME }}/todo_app:latest
