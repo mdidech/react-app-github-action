@@ -33,9 +33,9 @@ jobs:
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          host: ${{ secrets.EC_HOST }}
+          username: ${{ secrets.EC_USERNAME }}
+          key: ${{ secrets.EC_PRIVATE_KEY }}
           port: 22
           script: |
             if [ "$(docker ps -aq -f name=react_app)" ]; then
